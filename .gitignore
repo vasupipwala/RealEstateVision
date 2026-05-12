@@ -1,7 +1,45 @@
+# Python
 __pycache__/
-*.pyc
-.env
+*.py[cod]
+*.so
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+conda-meta/
+
+# OS / editor
 .DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# MLflow
 mlruns/
+mlartifacts/
+
+# Data outputs
 data/raw/
 data/processed/
+data/analytics/
+data/versions/
+
+# DVC cache
+.dvc/cache/
+
+# Model artifacts
+models/
+checkpoints/
+artifacts/
+
+# Database
+db/*.db
+
+# Misc
+*.sqlite
