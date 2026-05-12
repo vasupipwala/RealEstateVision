@@ -25,6 +25,7 @@ mlruns/
 mlartifacts/
 
 # Data outputs
+data/external/
 data/raw/
 data/processed/
 data/analytics/
