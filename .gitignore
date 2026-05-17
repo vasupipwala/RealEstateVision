@@ -1,46 +1,74 @@
-# Python
+# ── Python ────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.so
+*.pyd
 .pytest_cache/
 .ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
 
-# Virtual envs
+# ── Virtual environments ──────────────────────────────────
 .venv/
 venv/
 env/
 ENV/
 conda-meta/
 
-# OS / editor
+# ── OS / editor ───────────────────────────────────────────
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/
 
-# Logs
+# ── Logs ──────────────────────────────────────────────────
 *.log
+logs/
 
-# MLflow
+# ── MLflow ────────────────────────────────────────────────
 mlruns/
 mlartifacts/
 
-# Data outputs
+# ── Data directories (tracked by DVC instead) ────────────
 data/external/
 data/raw/
 data/processed/
 data/analytics/
 data/versions/
 
-# DVC cache
-.dvc/cache/
+# Allow DVC metadata files (must be tracked by Git)
+!data/raw.dvc
+!data/processed/cleaned.dvc
+!data/processed/validation_reports.dvc
 
-# Model artifacts
+# ── DVC internal cache (never commit) ────────────────────
+.dvc/cache/
+.dvc/tmp/
+
+# Allow DVC config and remote settings (tracked by Git)
+!.dvc/config
+!.dvc/.gitignore
+
+# ── Model artifacts ───────────────────────────────────────
 models/
 checkpoints/
 artifacts/
 
-# Database
+# ── Database files ────────────────────────────────────────
 db/*.db
-
-# Misc
 *.sqlite
+*.db
+
+# ── Reports (generated, tracked by DVC) ──────────────────
+reports/
+
+# ── Misc ─────────────────────────────────────────────────
+*.csv
+*.parquet
+*.h5
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.onnx
