@@ -30,18 +30,6 @@ logs/
 mlruns/
 mlartifacts/
 
-# ── Data directories (tracked by DVC instead) ────────────
-data/external/
-data/raw/
-data/processed/
-data/analytics/
-data/versions/
-
-# Allow DVC metadata files (must be tracked by Git)
-!data/raw.dvc
-!data/processed/cleaned.dvc
-!data/processed/validation_reports.dvc
-
 # ── DVC internal cache (never commit) ────────────────────
 .dvc/cache/
 .dvc/tmp/
