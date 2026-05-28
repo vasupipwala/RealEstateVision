@@ -1,8 +1,10 @@
 """
 Model building, loading, preprocessing and forward pass.
 Mirrors train_classifier.py so there is zero train/serve skew.
+Reads model metadata from evaluation report artifacts instead of hard-coded values.
 """
 
+import json
 import time
 from io import BytesIO
 from pathlib import Path
@@ -22,25 +24,10 @@ from torchvision.models import (
 
 CLASSES = ["bathroom", "bedroom", "diningroom", "kitchen", "livingroom"]
 IMG_SIZE = 224
-MODELS_DIR = Path(__file__).parent.parent / "models"
 
-MODEL_META = {
-    "mobilenet_v3_small": {
-        "param_count_M": 2.5,
-        "cost_per_1k_dkk": 0.32,
-        "maintainability_score": 5,
-    },
-    "efficientnet_b0": {
-        "param_count_M": 5.3,
-        "cost_per_1k_dkk": 0.51,
-        "maintainability_score": 4,
-    },
-    "resnet18": {
-        "param_count_M": 11.7,
-        "cost_per_1k_dkk": 0.45,
-        "maintainability_score": 5,
-    },
-}
+ROOT_DIR = Path(__file__).parent.parent
+MODELS_DIR = ROOT_DIR / "models"
+EVAL_REPORTS_DIR = ROOT_DIR / "data" / "processed" / "evaluation_reports"
 
 _TRANSFORMS = transforms.Compose([
     transforms.Resize(int(IMG_SIZE * 1.14)),
@@ -76,6 +63,69 @@ def _build_backbone(name: str) -> nn.Module:
     return model
 
 
+def _parse_model_file_name(pt_file: Path) -> tuple[str, str]:
+    """
+    Parse model and version from filenames like:
+    mobilenet_v3_small_cleaned_v1.pt
+    """
+    parts = pt_file.stem.split("_")
+    try:
+        cleaned_idx = next(i for i, part in enumerate(parts) if part == "cleaned")
+        model_name = "_".join(parts[:cleaned_idx])
+        version_tag = "_".join(parts[cleaned_idx:])
+    except StopIteration:
+        model_name = pt_file.stem
+        version_tag = "unknown"
+
+    return model_name, version_tag
+
+
+def _default_model_meta() -> dict:
+    return {
+        "accuracy": 0.0,
+        "latency_mean_ms": 0.0,
+        #"param_count_M": 0.0,
+        "cost_per_1k_dkk": 0.0,
+        "maintainability_score": 0.0,
+    }
+
+
+def _load_model_meta(model_name: str, version_tag: str) -> dict:
+    """
+    Load computed metadata from:
+    data/processed/evaluation_reports/{model_name}_{version_tag}_report.json
+
+    Expected fields come from the updated train_classifier.py report:
+    - report["quality"]["accuracy"]
+    - report["performance"]["latencymeanms"]
+    - report["cost"]["costper1kimagesdkk"]
+    - report["maintainability"]["maintainabilityscore"]
+    """
+    report_path = EVAL_REPORTS_DIR / f"{model_name}_{version_tag}_report.json"
+
+    if not report_path.exists():
+        return _default_model_meta()
+
+    try:
+        report = json.loads(report_path.read_text())
+    except Exception:
+        return _default_model_meta()
+        
+    
+    quality = report.get("quality", {})
+    performance = report.get("performance", {})
+    cost = report.get("cost", {})
+    maintainability = report.get("maintainability", {})
+
+    return {
+        "accuracy": float(quality.get("accuracy", 0.0)),
+        "latency_mean_ms": float(performance.get("latency_mean_ms", 0.0)),
+        #"param_count_M": float(maintainability.get("param_count_M", 0.0)),
+        "cost_per_1k_dkk": float(cost.get("cost_per_1k_images_dkk", 0.0)),
+        "maintainability_score": float(maintainability.get("maintainability_score", 0.0)),
+    }
+
+
 def load_model(model_name: str, version_tag: str, device: torch.device) -> nn.Module:
     """Load a fine-tuned model from models/{model_name}_{version_tag}.pt"""
     weight_file = MODELS_DIR / f"{model_name}_{version_tag}.pt"
@@ -98,32 +148,19 @@ def list_available_models() -> list[dict]:
     available = []
 
     for pt_file in sorted(MODELS_DIR.glob("*.pt")):
-        parts = pt_file.stem.split("_")
-        try:
-            cleaned_idx = next(i for i, part in enumerate(parts) if part == "cleaned")
-            model_name = "_".join(parts[:cleaned_idx])
-            version_tag = "_".join(parts[cleaned_idx:])
-        except StopIteration:
-            model_name = pt_file.stem
-            version_tag = "unknown"
-
-        meta = MODEL_META.get(
-            model_name,
-            {
-                "param_count_M": 0.0,
-                "cost_per_1k_dkk": 0.0,
-                "maintainability_score": 0,
-            },
-        )
+        model_name, version_tag = _parse_model_file_name(pt_file)
+        meta = _load_model_meta(model_name, version_tag)
 
         available.append(
             {
                 "model_name": model_name,
                 "version_tag": version_tag,
                 "weight_file": pt_file.name,
-                "param_count_M": meta["param_count_M"],
-                "cost_per_1k_dkk": meta["cost_per_1k_dkk"],
-                "maintainability_score": meta["maintainability_score"],
+                "accuracy": round(meta["accuracy"], 3),
+                "latency_mean_ms": round(meta["latency_mean_ms"], 3),
+                #"param_count_M": round(meta["param_count_M"], 3),
+                "cost_per_1k_dkk": round(meta["cost_per_1k_dkk"], 3),
+                "maintainability_score": round(meta["maintainability_score"], 3),
             }
         )
 
@@ -157,3 +194,4 @@ def predict_image(image_bytes: bytes, model: nn.Module, device: torch.device) ->
         ],
         "inference_time_ms": round(elapsed_ms, 3),
     }
+

@@ -22,13 +22,16 @@ def list_models(state: dict = Depends(get_state)):
 @router.post("/load")
 def load_model_endpoint(
     model_name: str,
-    version_tag: str,
+    dataset_version_tag: str,
     state: dict = Depends(get_state),
 ):
     """
     Hot-swap the globally active model without restarting the server.
     e.g. POST /models/load?model_name=resnet18&version_tag=cleaned_v1
     """
+    
+    version_tag = dataset_version_tag
+    
     try:
         model = load_model(model_name, version_tag, state["device"])
     except FileNotFoundError as exc:

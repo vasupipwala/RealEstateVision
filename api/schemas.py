@@ -1,6 +1,7 @@
 """Pydantic response + request models for the RealEstateVision API."""
 
 from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -22,9 +23,11 @@ class ModelInfo(BaseModel):
     model_name: str
     version_tag: str
     weight_file: str
-    param_count_M: float
+    accuracy: float
+    latency_mean_ms: float
+    #param_count_M: float
     cost_per_1k_dkk: float
-    maintainability_score: int
+    maintainability_score: float
 
 
 class ModelsResponse(BaseModel):
@@ -78,14 +81,37 @@ class DatasetVersion(BaseModel):
 
 
 class RunMetrics(BaseModel):
-    accuracy: Optional[float]
-    f1_weighted: Optional[float]
-    f1_macro: Optional[float]
-    mcc: Optional[float]
-    latency_mean_ms: Optional[float]
-    throughput_img_per_sec: Optional[float]
-    cost_per_1k_images_dkk: Optional[float]
-    maintainability_score: Optional[float]
+    accuracy: Optional[float] = None
+    f1_weighted: Optional[float] = None
+    f1_macro: Optional[float] = None
+    mcc: Optional[float] = None
+    cohen_kappa: Optional[float] = None
+    top_2_accuracy: Optional[float] = None
+    best_val_acc: Optional[float] = None
+    best_epoch: Optional[float] = None
+    latency_mean_ms: Optional[float] = None
+    latency_p50_ms: Optional[float] = None
+    latency_p95_ms: Optional[float] = None
+    latency_p99_ms: Optional[float] = None
+    throughput_img_per_sec: Optional[float] = None
+    batch_throughput_img_per_sec: Optional[float] = None
+    total_inference_sec: Optional[float] = None
+    cost_per_1k_images_dkk: Optional[float] = None
+    cost_for_test_set_dkk: Optional[float] = None
+    cost_scale_10k_dkk: Optional[float] = None
+    cost_scale_100k_dkk: Optional[float] = None
+    cost_scale_1M_dkk: Optional[float] = None
+    relative_compute_multiplier: Optional[float] = None
+    baseline_cost_per_1k_dkk: Optional[float] = None
+    baseline_throughput_img_per_sec: Optional[float] = None
+    maintainability_score: Optional[float] = None
+    param_count_M: Optional[float] = None
+    trainable_params_M: Optional[float] = None
+    trainable_params: Optional[int] = None
+    dependency_count: Optional[int] = None
+    maint_param_score_1_5: Optional[int] = None
+    maint_trainable_score_1_5: Optional[int] = None
+    maint_dependency_score_1_5: Optional[int] = None
 
 
 class MLflowRun(BaseModel):
@@ -94,6 +120,7 @@ class MLflowRun(BaseModel):
     model: Optional[str]
     version_tag: Optional[str]
     git_commit: Optional[str] = None
+    scoring_version: Optional[str] = None
     status: str
     start_time: Optional[str]
     metrics: RunMetrics
@@ -102,6 +129,57 @@ class MLflowRun(BaseModel):
 class RunsResponse(BaseModel):
     experiment_name: str
     runs: list[MLflowRun]
+
+
+class DashboardSummaryResponse(BaseModel):
+    experiment_name: str
+    dataset_version_tag: Optional[str] = None
+    scoring_version: Optional[str] = None
+    total_runs: int
+    latest_run_time: Optional[str] = None
+    best_model_by_accuracy: Optional[str] = None
+    best_model_by_latency: Optional[str] = None
+    best_model_by_cost: Optional[str] = None
+    best_model_by_maintainability: Optional[str] = None
+    recommended_model: Optional[str] = None
+
+
+class DashboardModelComparisonItem(BaseModel):
+    model: str
+    latest_run_id: Optional[str] = None
+    accuracy: Optional[float] = None
+    f1_weighted: Optional[float] = None
+    latency_mean_ms: Optional[float] = None
+    throughput_img_per_sec: Optional[float] = None
+    cost_per_1k_images_dkk: Optional[float] = None
+    maintainability_score: Optional[float] = None
+    param_count_M: Optional[float] = None
+    recommendation_rank: int
+
+
+class DashboardModelsCompareResponse(BaseModel):
+    experiment_name: str
+    dataset_version_tag: str
+    models: list[DashboardModelComparisonItem]
+
+
+class DashboardRecommendationScores(BaseModel):
+    quality_score: float
+    latency_score: float
+    cost_score: float
+    maintainability_score: float
+    overall_score: float
+
+
+class DashboardRecommendationResponse(BaseModel):
+    recommended_model: str
+    dataset_version_tag: str
+    scoring_version: str
+    decision_rule: str
+    reasoning: list[str]
+    #scores: DashboardRecommendationScores
+    runner_up_model: Optional[str] = None
+    #build_vs_buy_recommendation: str
 
 
 class HealthResponse(BaseModel):
