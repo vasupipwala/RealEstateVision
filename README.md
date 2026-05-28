@@ -140,6 +140,18 @@ RealEstateVision/
 ```
 
 
+## License & Copyright
+
+Copyright (c) 2026 Vasu Dipakkumar Pipwala. All rights reserved.
+
+This repository is licensed under the Apache License 2.0 — see the `LICENSE` file for details.  
+You may inspect, run, and fork this project for personal, educational, or commercial use as long as you comply with the license terms and preserve the copyright and license notices.
+
+For reuse beyond the scope of the Apache License 2.0, please contact: vasudipakkumarpipwala@gmail.com.
+
+
+
+
 
 
 
