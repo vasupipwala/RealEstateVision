@@ -1,2 +1,6 @@
+[core]
+    remote = gcs_public
 ['remote "localstore"']
     url = ../data/versions/dvc_remote
+['remote "gcs_public"']
+    url = gs://rev-dvc-vasu-2026/realestatevision
