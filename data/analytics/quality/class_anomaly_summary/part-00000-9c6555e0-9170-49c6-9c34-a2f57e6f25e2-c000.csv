@@ -1,0 +1,6 @@
+class_name,total_images,small_images,odd_aspect_images,non_rgb_images
+bathroom,100,9,0,0
+bedroom,100,17,0,0
+diningroom,100,1,0,0
+kitchen,100,1,0,0
+livingroom,100,4,0,0

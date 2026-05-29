@@ -1,0 +1,11 @@
+split,class_name,image_count,avg_width,avg_height,avg_file_size_kb
+test,bathroom,18,529.8,496.8,245.9
+test,bedroom,21,502.7,405.1,258.5
+test,diningroom,18,679.1,774.4,734.7
+test,kitchen,21,490.5,389.4,113.4
+test,livingroom,20,361.0,312.8,82.8
+train,bathroom,82,432.3,466.8,190.9
+train,bedroom,79,465.4,381.1,203.8
+train,diningroom,82,474.0,423.8,316.5
+train,kitchen,79,662.0,530.5,439.3
+train,livingroom,80,498.6,414.7,291.8
