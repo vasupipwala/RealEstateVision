@@ -23,6 +23,13 @@ From business perspective, poor data quality can quietly degrade model performan
 - which model should actually be deployed and why
 
 
+## Public API link
+
+Here is the RealEstateVision API link : https://realestatevision-api-744821244075.europe-west1.run.app
+
+**Note:** There maybe further updates as well in the near-future with more dashboard subsections to make the candidate models comparisons more explicit.
+
+
 ## API and dashboard sections
 
 | API script | API section | What it does | Why it matters |
@@ -90,6 +97,39 @@ The dashboard is not just an experiment log viewer. It is organized to answer th
 - **Recommendation** converts those results into a clear deployment choice.
 
 
+### Quick start: Clone and reproduce
+
+```bash
+git clone https://github.com/vasupipwala/RealEstateVision.git
+cd RealEstateVision
+
+python -m venv .venv
+source .venv/bin/activate
+
+pip install -r requirements.txt
+pip install -r requirements.api.txt
+pip install "dvc[gs]"
+
+dvc pull
+```
+
+**Run the API locally**
+```
+uvicorn api.main:app --reload
+```
+
+**Run with Docker**
+```
+docker compose up --build
+```
+
+**Notes**
+•    Large artifacts are stored in Google Cloud Storage through DVC.
+•    The repository keeps code and lightweight reports in GitHub, while heavier reproducible artifacts are pulled with DVC.
+
+
+
+
 ## Repo Structure
 
 ```text
@@ -136,6 +176,7 @@ RealEstateVision/
 ├── requirements.txt                # core project dependencies
 ├── requirements.api.txt                # API-specific dependencies
 ├── README.md
+|── LICENSE
 └── .dvc/               # DVC configuration
 ```
 

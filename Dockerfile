@@ -2,7 +2,8 @@ FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    PORT=8080
 
 WORKDIR /app
 
@@ -21,10 +22,16 @@ COPY requirements.api.txt .
 RUN pip install --upgrade pip && pip install -r requirements.api.txt
 
 COPY api ./api
+COPY models ./models
+COPY db ./db
+COPY data/processed ./data/processed
+COPY mlruns ./mlruns
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT}"]
+
+
 
 
 

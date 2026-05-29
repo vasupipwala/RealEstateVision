@@ -9,10 +9,6 @@ __pycache__
 *.log
 .DS_Store
 
-data
-db
-models
-mlruns
 checkpoints
 output
 reports
