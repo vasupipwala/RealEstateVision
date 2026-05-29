@@ -82,7 +82,6 @@ MLflow tracks each run with its model name, dataset version, metrics, and artifa
 
 ## Training and evaluation
 
-
 The core task is room-type classification across five classes: bathroom, bedroom, dining room, kitchen, and living room. The candidate models — MobileNetV3-Small, EfficientNet-B0, and ResNet-18 — were chosen to show the trade-off between lightweight and heavier image backbones under realistic constraints.
 
 Evaluation goes beyond accuracy. The pipeline also measures latency, throughput, cost per 1,000 images, maintainability, and parameter count, which makes the comparison closer to a real deployment decision than a pure benchmark.
@@ -97,7 +96,7 @@ The dashboard is not just an experiment log viewer. It is organized to answer th
 - **Recommendation** converts those results into a clear deployment choice.
 
 
-### Quick start: Clone and reproduce
+## Quick start: Clone and reproduce
 
 ```bash
 git clone https://github.com/vasupipwala/RealEstateVision.git
@@ -109,6 +108,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 pip install -r requirements.api.txt
 pip install "dvc[gs]"
+
+# If needed, authenticate to Google Cloud before pulling data
+# export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 
 dvc pull
 ```
@@ -124,10 +126,9 @@ docker compose up --build
 ```
 
 **Notes**
-•    Large artifacts are stored in Google Cloud Storage through DVC.
-•    The repository keeps code and lightweight reports in GitHub, while heavier reproducible artifacts are pulled with DVC.
-
-
+•   The repository keeps code, configs, and lightweight reports in GitHub.
+•   Large datasets, cached artifacts, and reproducible data assets are stored in Google Cloud Storage through DVC.
+•   dvc pull  may require local Google Cloud authentication or a service-account credential path on the machine where you clone the repo.
 
 
 ## Repo Structure
@@ -151,22 +152,12 @@ RealEstateVision/
 │   │   └── spark_process_metadata.py
 │   ├── database/               # load processed metadata into SQLite
 │   │   └── load_metadata_to_sqlite.py
-│   ├── validation/             # image quality and validation pipeline
+│   ├── validation/             # image quality and validation pipeline using the CleanVision package
 │   │   └── run_image_quality_validation_final.py
 │   └── training/               # model training and evaluation
 │       └── train_classifier.py
 |── data_versioning/                # record dataset version in SQL
 |   |── record_dataset_version.py
-├── data/
-│   ├── raw/                # source dataset
-│   │   └── mit_indoor_subset/
-│   ├── analytics/              # quality and metadata summaries
-│   │   └── quality/
-│   └── processed/
-|       └── metadata/               # full metadata extracted table
-|       └── validation_reports/             # data validation reports created using CleanVision package
-|       └── cleaned/                # resulting cleaned data
-│       └── evaluation_reports/             # model reports and comparison tables
 ├── checkpoints/                # best-checkpoint snapshots during training
 ├── models/             # exported model weights for serving
 ├── db/             # SQLite database and dataset metadata
