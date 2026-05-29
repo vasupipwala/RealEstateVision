@@ -1,0 +1,2 @@
+total_images,valid_images,corrupt_images,blurry_images,too_dark_images,too_bright_images,low_information_images,odd_aspect_ratio_images,odd_size_images,exact_duplicate_images,near_duplicate_images,valid_ratio
+500,497,0,0,0,0,0,0,13,8,2,0.994

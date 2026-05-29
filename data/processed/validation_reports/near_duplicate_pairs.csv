@@ -1,0 +1,11 @@
+image_id,duplicate_of,canonical_image_id,duplicate_distance,raw_path,class_name,split,cross_split_duplicate,cross_class_duplicate,manual_review_required,drop_reason
+test_bedroom_000005,train_bathroom_000033,train_bathroom_000033,0.0,data/raw/mit_indoor_subset/test/bedroom/bedroom_000005.jpg,bedroom,test,1,1,0,drop_test_duplicate_train_priority
+test_livingroom_000008,train_bathroom_000012,train_bathroom_000012,0.0,data/raw/mit_indoor_subset/test/livingroom/livingroom_000008.jpg,livingroom,test,1,1,0,drop_test_duplicate_train_priority
+train_bathroom_000003,,train_bathroom_000003,,data/raw/mit_indoor_subset/train/bathroom/bathroom_000003.jpg,bathroom,train,0,0,0,
+train_bathroom_000012,,train_bathroom_000012,,data/raw/mit_indoor_subset/train/bathroom/bathroom_000012.jpg,bathroom,train,0,0,0,
+train_bathroom_000033,,train_bathroom_000033,,data/raw/mit_indoor_subset/train/bathroom/bathroom_000033.jpg,bathroom,train,0,0,0,
+train_bedroom_000017,,train_bedroom_000017,,data/raw/mit_indoor_subset/train/bedroom/bedroom_000017.jpg,bedroom,train,0,0,0,
+train_bedroom_000020,train_bathroom_000003,train_bathroom_000003,0.0,data/raw/mit_indoor_subset/train/bedroom/bedroom_000020.jpg,bedroom,train,0,1,1,keep_cross_class_duplicate_same_split_manual_review
+train_bedroom_000024,,train_bedroom_000024,,data/raw/mit_indoor_subset/train/bedroom/bedroom_000024.jpg,bedroom,train,0,0,0,
+train_bedroom_000033,train_bedroom_000024,train_bedroom_000024,0.5,data/raw/mit_indoor_subset/train/bedroom/bedroom_000033.jpg,bedroom,train,0,0,0,drop_same_split_same_class_lower_quality
+train_kitchen_000073,train_bedroom_000017,train_bedroom_000017,0.0,data/raw/mit_indoor_subset/train/kitchen/kitchen_000073.jpg,kitchen,train,0,1,1,keep_cross_class_duplicate_same_split_manual_review

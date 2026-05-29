@@ -1,0 +1,11 @@
+split,class_name,total_images,valid_images,blurry_images,dark_images,bright_images,low_information_images,odd_aspect_ratio_images,odd_size_images,exact_duplicate_images,near_duplicate_images,corrupt_images
+test,bathroom,18,18,0,0,0,0,0,2,0,0,0
+test,bedroom,21,20,0,0,0,0,0,2,1,0,0
+test,diningroom,18,18,0,0,0,0,0,1,0,0,0
+test,kitchen,21,21,0,0,0,0,0,0,0,0,0
+test,livingroom,20,19,0,0,0,0,0,0,1,0,0
+train,bathroom,82,82,0,0,0,0,0,5,3,0,0
+train,bedroom,79,78,0,0,0,0,0,3,2,2,0
+train,diningroom,82,82,0,0,0,0,0,0,0,0,0
+train,kitchen,79,79,0,0,0,0,0,0,1,0,0
+train,livingroom,80,80,0,0,0,0,0,0,0,0,0
