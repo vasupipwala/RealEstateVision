@@ -39,8 +39,9 @@ mlartifacts/
 !.dvc/.gitignore
 
 # ── Model artifacts ───────────────────────────────────────
-checkpoints/
-artifacts/
+!checkpoints/
+!artifacts/
+!models/
 
 # ── Local databases ───────────────────────────────────────
 db/*.db
