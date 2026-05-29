@@ -1,0 +1,5 @@
+[core]
+    remote = gcs_public
+['remote "gcs_public"']
+    url = gs://rev-dvc-vasu-2026/realestatevision
+    projectname = realestatevision-dvc-vasu-2026

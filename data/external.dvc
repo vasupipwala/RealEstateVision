@@ -1,0 +1,6 @@
+outs:
+- md5: 9aca0069774b57baaf8b41d158321cac.dir
+  size: 612556953
+  nfiles: 2578
+  hash: md5
+  path: external

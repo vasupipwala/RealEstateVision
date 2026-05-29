@@ -94,3 +94,5 @@ data/**/.DS_Store
 data/**/.ipynb_checkpoints/
 
 
+data/versions/
+.dvc/cache/
