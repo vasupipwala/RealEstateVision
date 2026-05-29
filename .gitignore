@@ -30,77 +30,67 @@ logs/
 mlruns/
 mlartifacts/
 
-# ── DVC internal cache (never commit) ────────────────────
+# ── DVC internals ─────────────────────────────────────────
 .dvc/cache/
 .dvc/tmp/
 
-# Allow DVC config and remote settings (tracked by Git)
+# Keep DVC project config in Git
 !.dvc/config
 !.dvc/.gitignore
 
 # ── Model artifacts ───────────────────────────────────────
-#models/
-#checkpoints/
-#artifacts/
+checkpoints/
+artifacts/
 
-# ── Database files ────────────────────────────────────────
-#db/*.db
-#*.sqlite
-#*.db
+# ── Local databases ───────────────────────────────────────
+db/*.db
+*.sqlite
+*.db
 
-# ── Reports (generated, tracked by DVC) ──────────────────
-reports/
-
-# ── Misc ─────────────────────────────────────────────────
-#*.csv
+# ── Large binary artifacts ────────────────────────────────
 *.parquet
 *.h5
 *.pkl
 *.joblib
-#*.pt
 *.pth
 *.onnx
 *.tar
 *.zip
 
-# =============================
-# Portfolio exceptions for lightweight data outputs
-# =============================
+# ── Reports generated outside Git by default ──────────────
+reports/
 
-# Keep summary/report folders visible in GitHub
-!data/analytics/
-!data/analytics/quality/
-!data/analytics/quality/**
+# ── Data policy ───────────────────────────────────────────
+# Never track the whole data tree directly in Git
+data/**
 
+# But keep lightweight report/metadata folders visible in Git when present
+!data/
 !data/processed/
 !data/processed/metadata/
 !data/processed/metadata/**
-
-!data/processed/evaluation_reports/
-!data/processed/evaluation_reports/**
-
 !data/processed/validation_reports/
 !data/processed/validation_reports/**
+!data/processed/evaluation_reports/
+!data/processed/evaluation_reports/**
+!data/analytics/
+!data/analytics/**
 
-# Keep DVC metafiles tracked
+# Keep DVC metafiles in Git
+!data/external.dvc
 !data/raw.dvc
 !data/processed/cleaned.dvc
-!data/processed/evaluation_reports.dvc
+!data/processed/metadata.dvc
 !data/processed/validation_reports.dvc
+!data/processed/evaluation_reports.dvc
+!data/analytics.dvc
 
-# Keep DVC config tracked
-#!.dvc/config
-#!.dvc/.gitignore
-
-# Explicitly keep large data folders out of Git
-data/external/mit_indoor/Images/
-data/external/mit_indoor/indoorCVPR_09.tar
-data/raw/mit_indoor_subset/
-data/processed/cleaned/
-data/versions/dvc_remote/
+# Explicitly forbid versions folder everywhere
+data/versions/
 
 # Ignore junk inside visible data folders
 data/**/*.crc
 data/**/.DS_Store
 data/**/.ipynb_checkpoints/
+
 
