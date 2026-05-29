@@ -27,8 +27,8 @@ Thumbs.db
 logs/
 
 # ── MLflow ────────────────────────────────────────────────
-#mlruns/
-#mlartifacts/
+mlruns/
+mlartifacts/
 
 # ── DVC internal cache (never commit) ────────────────────
 .dvc/cache/
@@ -53,13 +53,13 @@ reports/
 
 # ── Misc ─────────────────────────────────────────────────
 #*.csv
-#*.parquet
-#*.h5
-#*.pkl
-#*.joblib
+*.parquet
+*.h5
+*.pkl
+*.joblib
 #*.pt
-#*.pth
-#*.onnx
+*.pth
+*.onnx
 *.tar
 *.zip
 
