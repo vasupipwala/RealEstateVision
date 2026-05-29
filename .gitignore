@@ -39,9 +39,9 @@ mlartifacts/
 !.dvc/.gitignore
 
 # ── Model artifacts ───────────────────────────────────────
-!checkpoints/
-!artifacts/
-!models/
+#checkpoints/
+#artifacts/
+#models/
 
 # ── Local databases ───────────────────────────────────────
 db/*.db
@@ -53,7 +53,7 @@ db/*.db
 *.h5
 *.pkl
 *.joblib
-*.pth
+#*.pth
 *.onnx
 *.tar
 *.zip
