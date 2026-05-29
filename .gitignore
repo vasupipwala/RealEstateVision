@@ -43,6 +43,14 @@ mlartifacts/
 #artifacts/
 #models/
 
+# Explicitly allow model artifacts in Git
+!models/
+!models/**
+!checkpoints/
+!checkpoints/**
+!*.pt
+!*.pth
+
 # ── Local databases ───────────────────────────────────────
 db/*.db
 *.sqlite
