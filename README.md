@@ -126,9 +126,9 @@ docker compose up --build
 ```
 
 **Notes**
-•   The repository keeps code, configs, and lightweight reports in GitHub.
-•   Large datasets, cached artifacts, and reproducible data assets are stored in Google Cloud Storage through DVC.
-•   dvc pull  may require local Google Cloud authentication or a service-account credential path on the machine where you clone the repo.
+- The repository keeps code, configs, and lightweight reports in GitHub.
+- Large datasets, cached artifacts, and reproducible data assets are stored in Google Cloud Storage through DVC.
+- dvc pull  may require local Google Cloud authentication or a service-account credential path on the machine where you clone the repo.
 
 
 ## Repo Structure
@@ -158,6 +158,17 @@ RealEstateVision/
 │       └── train_classifier.py
 |── data_versioning/                # record dataset version in SQL
 |   |── record_dataset_version.py
+├── data/
+│   ├── external.dvc
+│   ├── raw.dvc            
+│   ├── analytics/quality/              # quality and metadata summaries
+│   └── processed/
+│       └── metadata/               # full metadata extracted table
+│       └── validation_reports/             # data validation reports created using CleanVision package
+│       └── evaluation_reports/             # model reports and comparison tables
+│       └── cleaned.dvc                # resulting cleaned data
+│       └── validation_reports.dvc                
+│       └── evaluation_reports.dvc
 ├── checkpoints/                # best-checkpoint snapshots during training
 ├── models/             # exported model weights for serving
 ├── db/             # SQLite database and dataset metadata
