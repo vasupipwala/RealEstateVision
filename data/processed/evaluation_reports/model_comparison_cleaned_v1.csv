@@ -1,0 +1,4 @@
+model,version_tag,accuracy,f1_weighted,f1_macro,mcc,cohen_kappa,top_2_accuracy,latency_mean_ms,latency_p95_ms,throughput_img_per_sec,batch_throughput_img_s,total_inference_sec,cost_per_1k_dkk,cost_scale_10k_dkk,cost_scale_100k_dkk,cost_scale_1M_dkk,relative_compute_multiplier,maintainability_score,dependency_count,param_count_M,trainable_params_M,trainable_params
+mobilenet_v3_small,cleaned_v1,0.7812,0.7808,0.7796,0.7284,0.7265,0.9167,7.434,7.843,134.5,134.3,0.7146,0.7435,7.4349,74.3494,743.4944,0.7435,5.0,1,1.523,1.523,1522981
+efficientnet_b0,cleaned_v1,0.875,0.8766,0.8764,0.8476,0.8435,0.9375,11.85,12.902,84.4,78.6,1.2219,1.1848,11.8483,118.4834,1184.8341,1.1848,4.2,1,4.014,4.014,4013953
+resnet18,cleaned_v1,0.7708,0.7699,0.7681,0.7172,0.7136,0.8958,7.859,9.538,127.2,114.2,0.8408,0.7862,7.8616,78.6164,786.1635,0.7862,3.4,1,11.179,11.179,11179077
