@@ -1,0 +1,14 @@
+artifact_uri: /Users/vasu/Desktop/Self-driven projects/Project Industry/Esoft/RealEstateVision/mlruns/866285343127900544/7e53d515839c4e2b9aa22fe0c56278c8/artifacts
+end_time: 1780078719844
+entry_point_name: ''
+experiment_id: '866285343127900544'
+lifecycle_stage: active
+run_id: 7e53d515839c4e2b9aa22fe0c56278c8
+run_name: mobilenet_v3_small_cleaned_v1_20260529_181637
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780078598123
+status: 3
+tags: []
+user_id: vasu

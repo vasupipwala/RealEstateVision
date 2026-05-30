@@ -1,0 +1,10 @@
+artifact_location: /Users/vasu/Desktop/Self-driven projects/Project Industry/Esoft/RealEstateVision/mlruns/866285343127900544/models/m-4c9605eccc5442e1ad34d4996638e34c/artifacts
+creation_timestamp: 1780078712911
+experiment_id: '866285343127900544'
+last_updated_timestamp: 1780078719825
+model_id: m-4c9605eccc5442e1ad34d4996638e34c
+model_type: null
+name: model
+source_run_id: 7e53d515839c4e2b9aa22fe0c56278c8
+status: 2
+status_message: null

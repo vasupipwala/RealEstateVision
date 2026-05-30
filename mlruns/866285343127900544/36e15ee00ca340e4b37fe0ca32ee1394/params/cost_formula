@@ -1,0 +1,1 @@
+cost_per_1k_images_dkk = baseline_cost_per_1k_dkk * (baseline_throughput / throughput_img_per_sec)

@@ -1,0 +1,1 @@
+0.4*param_score + 0.4*trainable_score + 0.2*dependency_score

@@ -1,0 +1,14 @@
+artifact_uri: /Users/vasu/Desktop/Self-driven projects/Project Industry/Esoft/RealEstateVision/mlruns/866285343127900544/76eb34790bf24062a0575d764457f1aa/artifacts
+end_time: 1780079029485
+entry_point_name: ''
+experiment_id: '866285343127900544'
+lifecycle_stage: active
+run_id: 76eb34790bf24062a0575d764457f1aa
+run_name: efficientnet_b0_cleaned_v1_20260529_181840
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780078720129
+status: 3
+tags: []
+user_id: vasu

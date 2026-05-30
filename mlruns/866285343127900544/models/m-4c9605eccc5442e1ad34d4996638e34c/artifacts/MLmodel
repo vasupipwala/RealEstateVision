@@ -1,0 +1,23 @@
+artifact_path: /Users/vasu/Desktop/Self-driven projects/Project Industry/Esoft/RealEstateVision/mlruns/866285343127900544/models/m-4c9605eccc5442e1ad34d4996638e34c/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.10.20
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.11.0
+mlflow_version: 3.12.0
+model_id: m-4c9605eccc5442e1ad34d4996638e34c
+model_size_bytes: 6247551
+model_uuid: m-4c9605eccc5442e1ad34d4996638e34c
+prompts: null
+run_id: 7e53d515839c4e2b9aa22fe0c56278c8
+utc_time_created: '2026-05-29 18:18:33.068169'
