@@ -27,8 +27,9 @@ Thumbs.db
 logs/
 
 # ── MLflow ────────────────────────────────────────────────
-mlruns/
-mlartifacts/
+!mlruns/
+!mlruns/**
+!mlartifacts/
 
 # ── DVC internals ─────────────────────────────────────────
 .dvc/cache/
@@ -52,9 +53,11 @@ mlartifacts/
 !*.pth
 
 # ── Local databases ───────────────────────────────────────
-db/*.db
-*.sqlite
-*.db
+!db/
+!db/**
+!db/*.db
+!*.sqlite
+!*.db
 
 # ── Large binary artifacts ────────────────────────────────
 *.parquet
