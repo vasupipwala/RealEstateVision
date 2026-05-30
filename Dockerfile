@@ -18,14 +18,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.api.txt .
+COPY requirements.api.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.api.txt
 
-COPY api ./api
-COPY models ./models
-COPY db ./db
-COPY data/processed ./data/processed
-COPY mlruns ./mlruns
+COPY api/ ./api/
+COPY models/ ./models/
+COPY db/ ./db/
+COPY data/processed/ ./data/processed/
+COPY mlruns/ ./mlruns/
+
+RUN ls -la /app/mlruns && find /app/mlruns -maxdepth 2 -type d | head -50
 
 EXPOSE 8080
 
