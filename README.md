@@ -25,7 +25,7 @@ From business perspective, poor data quality can quietly degrade model performan
 
 ## Public API link
 
-Here is the RealEstateVision API link : https://realestatevision-api-744821244075.europe-west1.run.app
+Here is the RealEstateVision API link : https://realestatevision-api-744821244075.europe-west1.run.app/docs
 
 **Note:** There maybe further updates as well in the near-future with more dashboard subsections to make the candidate models comparisons more explicit.
 
